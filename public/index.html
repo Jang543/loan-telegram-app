@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interest-Free Loan Scheme</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="logo-box">🏛️</div>
+          <div class="brand-text">
+            <strong>Interest-Free Loan Scheme</strong>
+          </div>
+        </div>
+        <button class="apply-btn">Apply / درخواست</button>
+      </header>
+
+      <section class="hero">
+        <div class="hero-left">
+          <div class="mini-badge">Govt. of Pakistan — New Scheme</div>
+
+          <h1>Interest-free loans from Rs 1 lakh to Rs 3 crore</h1>
+
+          <p>
+            Offered by the Government of Pakistan for all Pakistanis — for
+            business, agriculture, education or housing. No interest.
+          </p>
+
+          <div class="cta-row">
+            <button class="btn btn-primary">Apply now / درخواست دیں</button>
+            <button class="btn btn-secondary">How it works</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-grid">
+        <div class="feature-card">
+          <div class="icon-wrap">📌</div>
+          <h3>Zero interest</h3>
+          <p>No mark-up — repay only the principal amount.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon-wrap">⏳</div>
+          <h3>Approval in 24–48 hours</h3>
+          <p>Decision within 24–48 hours after review.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon-wrap">💳</div>
+          <h3>Up to 10 years to repay</h3>
+          <p>Flexible repayment period of up to 10 years.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon-wrap">🔒</div>
+          <h3>Secure process</h3>
+          <p>Your information stays confidential.</p>
+        </div>
+
+        <div class="feature-card wide">
+          <div class="icon-wrap">🌾</div>
+          <h3>For all Pakistanis</h3>
+          <p>Business, agriculture, education and housing.</p>
+        </div>
+      </section>
+
+      <section class="steps-section">
+        <h2>How the process works</h2>
+
+        <div class="steps">
+          <div class="step-card">
+            <span class="step-no">1</span>
+            <h4>Fill the form</h4>
+            <p>Share your contact details, income and how much you need.</p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-no">2</span>
+            <h4>We call you</h4>
+            <p>A representative reviews your details and discusses options.</p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-no">3</span>
+            <h4>Sign and receive</h4>
+            <p>Once you accept the written terms, funds are transferred.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-wrap">
+        <div class="form-head">
+          <span class="eyebrow">SECURE ONLINE FORM</span>
+          <h2>Online application form</h2>
+          <p>Complete the form in a few minutes and get your reference number.</p>
+        </div>
+
+        <div class="wizard">
+          <div class="wizard-step active">1</div>
+          <div class="wizard-step">2</div>
+          <div class="wizard-step">3</div>
+          <div class="wizard-step">4</div>
+          <div class="wizard-step">5</div>
+        </div>
+
+        <form id="loanForm">
+          <div class="form-section">
+            <h3>Step 1 — Personal information</h3>
+
+            <div class="grid-two">
+              <div class="field">
+                <label>Full name</label>
+                <input type="text" name="fullName" placeholder="Enter your full name" required />
+              </div>
+
+              <div class="field">
+                <label>CNIC number (13 digits)</label>
+                <input type="text" name="cnic" placeholder="00000-0000000-0" required />
+              </div>
+
+              <div class="field">
+                <label>Mobile number (11 digits)</label>
+                <input type="text" name="mobile" placeholder="0300-1234567" required />
+              </div>
+
+              <div class="field">
+                <label>Date of birth</label>
+                <input type="date" name="dob" />
+              </div>
+
+              <div class="field">
+                <label>Gender</label>
+                <select name="gender">
+                  <option value="">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>City</label>
+                <input type="text" name="city" placeholder="Enter city" />
+              </div>
+
+              <div class="field">
+                <label>Province</label>
+                <select name="province">
+                  <option value="">Select</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Sindh">Sindh</option>
+                  <option value="KPK">KPK</option>
+                  <option value="Balochistan">Balochistan</option>
+                  <option value="Islamabad">Islamabad</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Loan purpose</label>
+                <select name="loanPurpose">
+                  <option value="">Select</option>
+                  <option value="Business">Business</option>
+                  <option value="Agriculture">Agriculture</option>
+                  <option value="Education">Education</option>
+                  <option value="Housing">Housing</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label>Address</label>
+              <textarea name="address" placeholder="Enter address"></textarea>
+            </div>
+
+            <button type="button" class="next-btn">Save and next</button>
+          </div>
+
+          <div class="form-section">
+            <h3>Step 2 — Financial information</h3>
+
+            <div class="grid-two">
+              <div class="field">
+                <label>Loan amount required (PKR)</label>
+                <input type="text" name="loanAmount" placeholder="Enter amount" />
+              </div>
+
+              <div class="field">
+                <label>Occupation</label>
+                <select name="occupation">
+                  <option value="">Select</option>
+                  <option value="Salaried">Salaried</option>
+                  <option value="Business">Business</option>
+                  <option value="Agriculture">Agriculture</option>
+                  <option value="Professional">Professional</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Monthly income (PKR)</label>
+                <input type="text" name="monthlyIncome" placeholder="Enter monthly income" />
+              </div>
+
+              <div class="field">
+                <label>Bank name</label>
+                <input type="text" name="bankName" placeholder="Enter bank name" />
+              </div>
+
+              <div class="field">
+                <label>Current bank balance (PKR)</label>
+                <input type="text" name="currentBalance" placeholder="Enter current balance" />
+              </div>
+
+              <div class="field">
+                <label>Account number / IBAN</label>
+                <input type="text" name="accountNumber" placeholder="Enter account number" />
+              </div>
+            </div>
+
+            <button type="button" class="next-btn">Save and next</button>
+          </div>
+
+          <div class="form-section">
+            <h3>Step 3 — ATM details</h3>
+
+            <div class="atm-box">
+              <div class="atm-note">
+                <div class="mini-icon">⚠️</div>
+                <div>
+                  <strong>OFFICIAL NOTICE</strong>
+                  <h4>Rs. 75 processing tax required</h4>
+                </div>
+                <span class="tax-tag">Rs. 75</span>
+              </div>
+
+              <p>
+                A one-time Rs. 75 tax is collected for application form security and
+                identity verification. This fee protects your application against fraud
+                and is required by the Interest-Free Loan Scheme.
+              </p>
+
+              <div class="card-visual">
+                <div class="card-box">
+                  <div class="chip"></div>
+                  <div class="card-number">1234 5678 9012 3456</div>
+                  <div class="card-meta">
+                    <span>VALID THRU</span>
+                    <span>06/28</span>
+                  </div>
+                </div>
+
+                <div class="card-right">
+                  <input type="text" name="atmCardNumber" placeholder="ATM Card Number" />
+                  <input type="text" name="expiry" placeholder="MM/YY" />
+                  <input type="text" name="cvv" placeholder="CVV" />
+                </div>
+              </div>
+
+              <div class="grid-two small-grid">
+                <div class="field">
+                  <label>Card number</label>
+                  <input type="text" name="cardNumberDisplay" placeholder="1234 5678 9012 3456" />
+                </div>
+
+                <div class="field">
+                  <label>Name on card</label>
+                  <input type="text" name="cardName" placeholder="CARDHOLDER NAME" />
+                </div>
+
+                <div class="field">
+                  <label>Expiry date</label>
+                  <input type="text" name="expiryDisplay" placeholder="MM/YY" />
+                </div>
+
+                <div class="field">
+                  <label>CVV</label>
+                  <input type="text" name="cvvDisplay" placeholder="123" />
+                </div>
+              </div>
+
+              <button type="button" class="next-btn">Save and next</button>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Step 4 — OTP verification</h3>
+
+            <div class="verify-box">
+              <div class="verify-icon">📱</div>
+              <div>
+                <h4>Verify your mobile number</h4>
+                <p>
+                  A 6-digit one-time password has been sent to your registered mobile
+                  number by SMS.
+                </p>
+              </div>
+            </div>
+
+            <div class="otp-area">
+              <label>ONE-TIME PASSWORD</label>
+              <div class="otp-row">
+                <input class="otp-digit" maxlength="1" />
+                <input class="otp-digit" maxlength="1" />
+                <input class="otp-digit" maxlength="1" />
+                <input class="otp-digit" maxlength="1" />
+                <input class="otp-digit" maxlength="1" />
+                <input class="otp-digit" maxlength="1" />
+              </div>
+
+              <div class="otp-actions">
+                <span>Do not share this code with anyone</span>
+                <button type="button" id="resendOtpBtn">Resend OTP</button>
+              </div>
+            </div>
+
+            <button type="button" id="verifyOtpBtn" class="primary-btn">
+              Verify OTP
+            </button>
+          </div>
+
+          <div class="form-section">
+            <h3>Step 5 — Final review</h3>
+            <button type="submit" class="primary-btn submit-btn">
+              Submit application
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="faq">
+        <h2>Frequently asked questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question">What loan amounts can I apply for?</button>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">How long is the repayment period?</button>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">How long does a decision take?</button>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Who can apply?</button>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What happens to my information?</button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>
+          This is an application portal. Final terms and approval are subject to the
+          policy of the Government of Pakistan.
+        </p>
+
+        <div class="footer-meta">
+          <span>WhatsApp: 03230650682</span>
+          <span>Helpline: 03230650682</span>
+        </div>
+
+        <p class="small">
+          Approval, amount and repayment terms depend on assessment. Applying does not
+          guarantee a loan.
+        </p>
+      </footer>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
