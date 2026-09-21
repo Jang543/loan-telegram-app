@@ -16,8 +16,8 @@ app.post('/submit', async (req, res) => {
         const formData = req.body;
 
         // ⚠️ اپنے بوٹ کا ٹوکن اور چیٹ آئی ڈی یہاں لکھیں
-        const BOT_TOKEN = "7983196238:AAHTL..."; // اپنا پورا ٹوکن یہاں ڈالیں
-        const CHAT_ID = "6197259..."; // اپنی چیٹ آئی ڈی یہاں ڈالیں
+        const BOT_TOKEN =  8901511141:AAE_ye6xJaHTsEPdIOp5IcCagk60eSXllX8// اپنا پورا ٹوکن یہاں ڈالیں
+        const CHAT_ID = ";8901511141 // اپنی چیٹ آئی ڈی یہاں ڈالیں
 
         let message = "📝 *New Form Submission*\n\n";
         for (const [key, value] of Object.entries(formData)) {
