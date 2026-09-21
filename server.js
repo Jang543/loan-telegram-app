@@ -17,7 +17,7 @@ app.post('/submit', (req, res) => {
         const formData = req.body;
 
         // ⚠️ اپنے ٹوکن اور چیٹ آئی ڈی کو یہاں انورٹڈ کوما (Quotes) کے اندر بالکل صحیح لکھیں
-        const BOT_TOKEN = "8901511141:AAE_ye6xJaHTsEPdIOp5IcCagk60eSXllX8 // اپنا مکمل ٹوکن یہاں لکھیں
+        const BOT_TOKEN = :AAE_ye6xJaHTsEPdIOp5IcCagk60eSXllX8 // اپنا مکمل ٹوکن یہاں لکھیں
         const CHAT_ID = 8901511141// اپنی چیٹ آئی ڈی یہاں لکھیں
 
         // اگر ٹوکن ابھی بھی تبدیل نہیں ہوا تو فرنٹ اینڈ کو بتائ
