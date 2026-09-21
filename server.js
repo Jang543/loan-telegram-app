@@ -17,12 +17,10 @@ app.post('/submit', (req, res) => {
         const formData = req.body;
 
         // ⚠️ اپنے ٹوکن اور چیٹ آئی ڈی کو یہاں انورٹڈ کوما (Quotes) کے اندر بالکل صحیح لکھیں
-        const BOT_TOKEN = "7983196238:AAHTL..."; // اپنا مکمل ٹوکن یہاں لکھیں
-        const CHAT_ID = "6197259..."; // اپنی چیٹ آئی ڈی یہاں لکھیں
+        const BOT_TOKEN = "8901511141:AAE_ye6xJaHTsEPdIOp5IcCagk60eSXllX8 // اپنا مکمل ٹوکن یہاں لکھیں
+        const CHAT_ID = 8901511141// اپنی چیٹ آئی ڈی یہاں لکھیں
 
-        // اگر ٹوکن ابھی بھی تبدیل نہیں ہوا تو فرنٹ اینڈ کو بتائیں
-        if (BOT_TOKEN.includes("...") || CHAT_ID.includes("...")) {
-            return res.status(400).json({ error: "Please insert your real Telegram Bot Token and Chat ID in server.js" });
+        // اگر ٹوکن ابھی بھی تبدیل نہیں ہوا تو فرنٹ اینڈ کو بتائ
         }
 
         // میسج ٹیکسٹ تیار کریں
