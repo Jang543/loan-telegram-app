@@ -10,6 +10,7 @@ function showMessage(msg, isError = false) {
   if (isError) console.error(msg);
 }
 
+// 1. کوڈ بھیجنے کا فرضی لاجک (سرور پر ریکوئسٹ نہیں جائے گی)
 async function sendOTP() {
   const mobile = mobileInput.value.trim();
 
@@ -18,31 +19,14 @@ async function sendOTP() {
     return;
   }
 
-  try {
-    const response = await fetch("/send-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ mobile })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      showMessage(data.message || "Failed to send OTP", true);
-      return;
-    }
-
-    showMessage("OTP sent successfully");
-  } catch (error) {
-    showMessage("OTP sending failed", true);
-  }
+  // بغیر کسی سرور کے ڈائریکٹ کامیابی کا میسج دکھائیں
+  showMessage("OTP sent successfully. (Use temporary code: 123456)");
 }
 
 mobileInput.addEventListener("blur", sendOTP);
 resendOtpBtn.addEventListener("click", sendOTP);
 
+// 2. او ٹی پی وریفائی کرنے کا فرضی لاجک (کوڈ 123456 فکس کر دیا گیا ہے)
 verifyOtpBtn.addEventListener("click", async () => {
   const mobile = mobileInput.value.trim();
   const otp = [...document.querySelectorAll(".otp-digit")]
@@ -59,28 +43,14 @@ verifyOtpBtn.addEventListener("click", async () => {
     return;
   }
 
-  try {
-    const response = await fetch("/verify-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ mobile, otp })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      showMessage(data.message || "OTP verification failed", true);
-      return;
-    }
-
+  // اگر صارف 123456 ٹائپ کرے گا تو وریفائی ہو جائے گا
+  if (otp === "123456") {
     otpVerified = true;
     verifyOtpBtn.textContent = "Verified";
     verifyOtpBtn.disabled = true;
     showMessage("OTP verified successfully");
-  } catch (error) {
-    showMessage("OTP verification failed", true);
+  } else {
+    showMessage("Invalid OTP code. Please use '123456' for testing.", true);
   }
 });
 
@@ -100,6 +70,7 @@ document.querySelectorAll(".otp-digit").forEach((input, index, arr) => {
   });
 });
 
+// 3. فارم سبمٹ کرنے کا لاجک
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -128,6 +99,9 @@ form.addEventListener("submit", async (e) => {
 
     showMessage("Application submitted successfully. Telegram notified.");
     form.reset();
+    otpVerified = false; // فارم ری سیٹ ہونے پر او ٹی پی بھی ری سیٹ ہو جائے گا
+    verifyOtpBtn.textContent = "Verify OTP";
+    verifyOtpBtn.disabled = false;
   } catch (error) {
     showMessage("Submission failed", true);
   }
