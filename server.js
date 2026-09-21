@@ -16,12 +16,10 @@ app.post('/submit', (req, res) => {
     try {
         const formData = req.body;
 
-        // ⚠️ اپنے ٹوکن اور آئی ڈی کو یہاں انورٹڈ کوما کے اندر بالکل صحیح لکھیں
-        const BOT_TOKEN = 8898828564:AAE5KYSdDZvo0fg2gmHVC3SPmF1LCoDfH3s;
-         
-        const CHAT_ID = 8898828564
+        // آپ کا بالکل فریش ٹوکن اور آپ کی پرسنل چیٹ آئی ڈی
+        const BOT_TOKEN = "8898828564:AAE5KYSdDZvo0fg2gmHVC3SPmF1LCoDFH3s"; 
+        const CHAT_ID = "8575428267"; 
 
-        // میسج ٹیکسٹ تیار کریں
         let message = "📝 *New Form Submission*\n\n";
         for (const [key, value] of Object.entries(formData)) {
             message += `*${key}:* ${value}\n`;
@@ -52,7 +50,7 @@ app.post('/submit', (req, res) => {
                 if (telegramRes.statusCode === 200) {
                     return res.status(200).json({ success: true });
                 } else {
-                    return res.status(400).json({ error: `Telegram Error: Status ${telegramRes.statusCode}` });
+                    return res.status(400).json({ error: `Telegram Error: Status ${telegramRes.statusCode} - ${body}` });
                 }
             });
         });
