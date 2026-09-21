@@ -17,9 +17,9 @@ app.post('/submit', (req, res) => {
         const formData = req.body;
 
         // ⚠️ اپنے ٹوکن اور آئی ڈی کو یہاں انورٹڈ کوما کے اندر بالکل صحیح لکھیں
-        const BOT_TOKEN = "8901511141:AAE_ye6xJaHTsEPdIOp5IcCagk60eSX1lX8";
+        const BOT_TOKEN = 8898828564:AAE5KYSdDZvo0fg2gmHVC3SPmF1LCoDfH3s;
          
-        const CHAT_ID = "8575428267"
+        const CHAT_ID = 8898828564
 
         // میسج ٹیکسٹ تیار کریں
         let message = "📝 *New Form Submission*\n\n";
