@@ -8,13 +8,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;8898828564:AAE5KYSdDZvo0fg2gmHVC3SPmF1LCoDfH3s
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;8898828564:AAHLazmrHkhpvrf1jBZv5C404lo96n7s400
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;8575428267
 
-// Sirf safe/non-sensitive fields Telegram par jayengi
+// Sirf safe application fields
 const allowedFields = [
   'applicationId',
   'name',
+  'phone',
   'city',
   'purpose',
   'amount',
@@ -24,6 +25,7 @@ const allowedFields = [
 app.post('/submit', (req, res) => {
   if (!BOT_TOKEN || !CHAT_ID) {
     return res.status(500).json({
+      success: false,
       error: 'Telegram environment variables missing'
     });
   }
@@ -31,7 +33,7 @@ app.post('/submit', (req, res) => {
   const lines = ['New Application'];
 
   for (const field of allowedFields) {
-    if (req.body[field] !== undefined) {
+    if (req.body[field] !== undefined && req.body[field] !== '') {
       lines.push(`${field}: ${String(req.body[field])}`);
     }
   }
@@ -41,39 +43,48 @@ app.post('/submit', (req, res) => {
     text: lines.join('\n')
   });
 
-  const telegramReq = https.request({
-    hostname: 'api.telegram.org',
-    port: 443,
-    path: `/bot${BOT_TOKEN}/sendMessage`,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(telegramData)
-    }
-  }, (telegramRes) => {
-    let body = '';
-
-    telegramRes.on('data', (chunk) => {
-      body += chunk;
-    });
-
-    telegramRes.on('end', () => {
-      if (telegramRes.statusCode === 200) {
-        return res.json({ success: true });
+  const telegramReq = https.request(
+    {
+      hostname: 'api.telegram.org',
+      port: 443,
+      path: `/bot${BOT_TOKEN}/sendMessage`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(telegramData)
       }
+    },
+    (telegramRes) => {
+      let responseBody = '';
 
-      console.error('Telegram error:', telegramRes.statusCode, body);
-
-      return res.status(502).json({
-        error: `Telegram Error: ${telegramRes.statusCode}`
+      telegramRes.on('data', (chunk) => {
+        responseBody += chunk;
       });
-    });
-  });
+
+      telegramRes.on('end', () => {
+        if (telegramRes.statusCode === 200) {
+          return res.json({ success: true });
+        }
+
+        console.error(
+          'Telegram error:',
+          telegramRes.statusCode,
+          responseBody
+        );
+
+        return res.status(502).json({
+          success: false,
+          error: `Telegram Error: ${telegramRes.statusCode}`
+        });
+      });
+    }
+  );
 
   telegramReq.on('error', (error) => {
     console.error('Telegram connection error:', error.message);
 
     return res.status(502).json({
+      success: false,
       error: 'Telegram connection failed'
     });
   });
