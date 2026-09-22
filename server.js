@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;8898828564:AAHLazmrHkhpvrf1jBZv5C404lo96n7s400
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;8988726172:AAH3LjtRaeBTSMqrhmQi6QV0L1XiYhQn3aU
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;8575428267
 
 // Sirf safe application fields
